@@ -44,7 +44,7 @@ namespace gr {
       // Where all the action really happens
       void forecast (int noutput_items, gr_vector_int &ninput_items_required);
 
-      int dedisperse(const float *input, float *output);
+      int event(const float *input, float *output);
 
       int general_work(int noutput_items,
            gr_vector_int &ninput_items,

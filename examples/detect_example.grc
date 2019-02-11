@@ -6,7 +6,7 @@
     <key>options</key>
     <param>
       <key>author</key>
-      <value></value>
+      <value>Glen Langston</value>
     </param>
     <param>
       <key>window_size</key>
@@ -22,7 +22,7 @@
     </param>
     <param>
       <key>description</key>
-      <value>detect test</value>
+      <value>Sigma-based event detection</value>
     </param>
     <param>
       <key>_enabled</key>
@@ -46,7 +46,7 @@
     </param>
     <param>
       <key>id</key>
-      <value>dedisperse</value>
+      <value>detect</value>
     </param>
     <param>
       <key>max_nouts</key>
@@ -78,7 +78,7 @@
     </param>
     <param>
       <key>title</key>
-      <value>Dedisperse</value>
+      <value>Event Detect</value>
     </param>
   </block>
   <block>
@@ -133,6 +133,69 @@
     <param>
       <key>value</key>
       <value>100</value>
+    </param>
+  </block>
+  <block>
+    <key>variable_qtgui_range</key>
+    <param>
+      <key>comment</key>
+      <value></value>
+    </param>
+    <param>
+      <key>value</key>
+      <value>3.6</value>
+    </param>
+    <param>
+      <key>_enabled</key>
+      <value>True</value>
+    </param>
+    <param>
+      <key>_coordinate</key>
+      <value>(288, 340)</value>
+    </param>
+    <param>
+      <key>gui_hint</key>
+      <value></value>
+    </param>
+    <param>
+      <key>_rotation</key>
+      <value>0</value>
+    </param>
+    <param>
+      <key>id</key>
+      <value>nsigma</value>
+    </param>
+    <param>
+      <key>label</key>
+      <value>N Sigma</value>
+    </param>
+    <param>
+      <key>min_len</key>
+      <value>100</value>
+    </param>
+    <param>
+      <key>orient</key>
+      <value>Qt.Horizontal</value>
+    </param>
+    <param>
+      <key>start</key>
+      <value>0.1</value>
+    </param>
+    <param>
+      <key>step</key>
+      <value>.1</value>
+    </param>
+    <param>
+      <key>stop</key>
+      <value>10.</value>
+    </param>
+    <param>
+      <key>rangeType</key>
+      <value>float</value>
+    </param>
+    <param>
+      <key>widget</key>
+      <value>counter</value>
     </param>
   </block>
   <block>
@@ -338,57 +401,6 @@
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(416, 156)</value>
-    </param>
-    <param>
-      <key>_rotation</key>
-      <value>0</value>
-    </param>
-    <param>
-      <key>id</key>
-      <value>blocks_stream_to_vector_0_0</value>
-    </param>
-    <param>
-      <key>type</key>
-      <value>float</value>
-    </param>
-    <param>
-      <key>maxoutbuf</key>
-      <value>0</value>
-    </param>
-    <param>
-      <key>minoutbuf</key>
-      <value>0</value>
-    </param>
-    <param>
-      <key>num_items</key>
-      <value>nt</value>
-    </param>
-    <param>
-      <key>vlen</key>
-      <value>vec_length</value>
-    </param>
-  </block>
-  <block>
-    <key>blocks_stream_to_vector</key>
-    <param>
-      <key>alias</key>
-      <value></value>
-    </param>
-    <param>
-      <key>comment</key>
-      <value></value>
-    </param>
-    <param>
-      <key>affinity</key>
-      <value></value>
-    </param>
-    <param>
-      <key>_enabled</key>
-      <value>1</value>
-    </param>
-    <param>
-      <key>_coordinate</key>
       <value>(72, 332)</value>
     </param>
     <param>
@@ -464,7 +476,7 @@
     </param>
     <param>
       <key>samples_per_second</key>
-      <value>1000</value>
+      <value>samp_rate</value>
     </param>
     <param>
       <key>type</key>
@@ -495,58 +507,7 @@
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(312, 404)</value>
-    </param>
-    <param>
-      <key>_rotation</key>
-      <value>0</value>
-    </param>
-    <param>
-      <key>id</key>
-      <value>blocks_vector_to_stream_0_1</value>
-    </param>
-    <param>
-      <key>type</key>
-      <value>float</value>
-    </param>
-    <param>
-      <key>maxoutbuf</key>
-      <value>0</value>
-    </param>
-    <param>
-      <key>minoutbuf</key>
-      <value>0</value>
-    </param>
-    <param>
-      <key>num_items</key>
-      <value>nt</value>
-    </param>
-    <param>
-      <key>vlen</key>
-      <value>vec_length</value>
-    </param>
-  </block>
-  <block>
-    <key>blocks_vector_to_stream</key>
-    <param>
-      <key>alias</key>
-      <value></value>
-    </param>
-    <param>
-      <key>comment</key>
-      <value></value>
-    </param>
-    <param>
-      <key>affinity</key>
-      <value></value>
-    </param>
-    <param>
-      <key>_enabled</key>
-      <value>1</value>
-    </param>
-    <param>
-      <key>_coordinate</key>
-      <value>(272, 532)</value>
+      <value>(624, 508)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -636,7 +597,7 @@
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(536, 372)</value>
+      <value>(832, 244)</value>
     </param>
     <param>
       <key>gui_hint</key>
@@ -907,7 +868,7 @@
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(992, 148)</value>
+      <value>(832, 4)</value>
     </param>
     <param>
       <key>gui_hint</key>
@@ -1186,7 +1147,7 @@
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(112, 644)</value>
+      <value>(824, 484)</value>
     </param>
     <param>
       <key>gui_hint</key>
@@ -1393,7 +1354,7 @@
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(680, 172)</value>
+      <value>(624, 28)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -1417,7 +1378,7 @@
     </param>
     <param>
       <key>dms</key>
-      <value>ndm</value>
+      <value>nsigma</value>
     </param>
     <param>
       <key>f_obs</key>
@@ -1425,7 +1386,7 @@
     </param>
     <param>
       <key>nt</key>
-      <value>nt</value>
+      <value>vec_length</value>
     </param>
     <param>
       <key>t_int</key>
@@ -1449,18 +1410,6 @@
     <sink_key>0</sink_key>
   </connection>
   <connection>
-    <source_block_id>blocks_stream_to_vector_0_0</source_block_id>
-    <sink_block_id>blocks_vector_to_stream_0_1</sink_block_id>
-    <source_key>0</source_key>
-    <sink_key>0</sink_key>
-  </connection>
-  <connection>
-    <source_block_id>blocks_stream_to_vector_0_0</source_block_id>
-    <sink_block_id>radio_astro_detect_0</sink_block_id>
-    <source_key>0</source_key>
-    <sink_key>0</sink_key>
-  </connection>
-  <connection>
     <source_block_id>blocks_stream_to_vector_0_0_0</source_block_id>
     <sink_block_id>blocks_abs_xx_0</sink_block_id>
     <source_key>0</source_key>
@@ -1468,19 +1417,19 @@
   </connection>
   <connection>
     <source_block_id>blocks_throttle_0</source_block_id>
-    <sink_block_id>blocks_stream_to_vector_0_0</sink_block_id>
-    <source_key>0</source_key>
-    <sink_key>0</sink_key>
-  </connection>
-  <connection>
-    <source_block_id>blocks_vector_to_stream_0_1</source_block_id>
     <sink_block_id>blocks_vector_to_stream_0_2</sink_block_id>
     <source_key>0</source_key>
     <sink_key>0</sink_key>
   </connection>
   <connection>
-    <source_block_id>blocks_vector_to_stream_0_1</source_block_id>
+    <source_block_id>blocks_throttle_0</source_block_id>
     <sink_block_id>qtgui_vector_sink_f_0</sink_block_id>
+    <source_key>0</source_key>
+    <sink_key>0</sink_key>
+  </connection>
+  <connection>
+    <source_block_id>blocks_throttle_0</source_block_id>
+    <sink_block_id>radio_astro_detect_0</sink_block_id>
     <source_key>0</source_key>
     <sink_key>0</sink_key>
   </connection>
