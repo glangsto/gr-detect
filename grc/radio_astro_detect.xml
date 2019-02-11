@@ -5,6 +5,11 @@
   <category>[radio_astro]</category>
   <import>import radio_astro</import>
   <make>radio_astro.detect($vec_length, $dms, $f_obs, $bw, $t_int, $nt)</make>
+  <callback>set_dms( $dms)</callback>
+  <callback>set_vec_length( $vec_length)</callback>
+  <callback>set_bw( $bw)</callback>
+  <callback>set_f_obs( $f_obs)</callback>
+  <callback>set_nt( $nt)</callback>
   <!-- Make one 'param' node for every Parameter you want settable from the GUI.
        Sub-nodes:
        * name
@@ -15,33 +20,28 @@
     <key>vec_length</key>
     <type>int</type>
   </param>
-
   <param>
-    <name>dms</name>
+    <name>N Simga</name>
     <key>dms</key>
     <type>float</type>
   </param>
-
   <param>
     <name>f_obs</name>
     <key>f_obs</key>
     <type>float</type>
   </param>
-  
   <param>
-    <name>bw</name>
+    <name>bw (MHz)</name>
     <key>bw</key>
     <type>float</type>
   </param>
-
   <param>
     <name>t_int</name>
     <key>t_int</key>
     <type>float</type>
   </param>
-
   <param>
-    <name>nt</name>
+    <name>Mode</name>
     <key>nt</key>
     <type>int</type>
   </param>
@@ -53,7 +53,7 @@
   <sink>
     <name>in</name>
     <type>float</type>
-    <vlen>$vec_length*$nt</vlen>
+    <vlen>$vec_length</vlen>
   </sink>
 
   <!-- Make one 'source' node per output. Sub-nodes:
@@ -64,6 +64,6 @@
   <source>
     <name>out</name>
     <type>float</type>
-    <vlen>$nt</vlen>
+    <vlen>$vec_length</vlen>
   </source>
 </block>
