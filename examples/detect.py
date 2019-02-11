@@ -5,7 +5,7 @@
 # Title: Event Detect
 # Author: Glen Langston
 # Description: Sigma-based event detection
-# Generated: Mon Feb 11 11:30:47 2019
+# Generated: Mon Feb 11 13:08:57 2019
 ##################################################
 
 from distutils.version import StrictVersion
@@ -74,14 +74,14 @@ class detect(gr.top_block, Qt.QWidget):
         self.vec_length = vec_length = 512
         self.samp_rate = samp_rate = 10e6
         self.nt = nt = 512
-        self.nsigma = nsigma = 3.6
+        self.nsigma = nsigma = 4.5
         self.ndm = ndm = 100
         self.freq = freq = 705e6
 
         ##################################################
         # Blocks
         ##################################################
-        self._nsigma_range = Range(0.1, 10., .1, 3.6, 100)
+        self._nsigma_range = Range(0.1, 10., .1, 4.5, 100)
         self._nsigma_win = RangeWidget(self._nsigma_range, self.set_nsigma, 'N Sigma', "counter", float)
         self.top_layout.addWidget(self._nsigma_win)
         self.radio_astro_detect_0 = radio_astro.detect(vec_length, nsigma, freq/1e6, samp_rate/1e6, 1, vec_length)

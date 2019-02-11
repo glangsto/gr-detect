@@ -79,10 +79,10 @@ namespace gr {
       int success;
 
       success = event(in, out);
-      if (success == 0)
-	{
-	  std::cout << "Processed " << ninputs << " Vectors" << "\n";
-	}
+      //      if (success == 0)
+      //	{
+      //	  std::cout << "Processed " << ninputs << " Vectors" << "\n";
+      //	}
       //std::cout << out[0*d_dms+ 0] << " " << out[31*d_dms+49] <<"\n";
 
       // Tell runtime system how many input items we consumed on
@@ -93,41 +93,79 @@ namespace gr {
       return noutput_items;
     } // end of detect_impl:: general_work
     
+
+    int
+    detect_impl::update_buffer()
+    { long vlen = d_vec_length, vlen2 = d_vec_length/2, i = inext2;
+
+      i -= vlen2;  // center peak in middle of output vector
+
+      // if event is well within the circular buffer 
+      if ((i > vlen2) && (i < MAX_BUFF - vlen2))
+	{ for (long j = 0; j < vlen; j++)
+	    { samples[j] = circular[i];
+	      i++;
+	    }
+	}
+
+      // now must reset the buffer to wait for the next event
+      bufferfull = 0;
+      return 0;
+    } // end of update_buffer()
+    
     int
     detect_impl::event(const float *input, float *output)
     {
       //outbuf = (float *) //create fresh one if necessary
       float n_sigma = d_dms; // translate variables 
       int mode = d_nt;
-      int imax = 0;
       int vlen = d_vec_length;
-      double sum2 = 0, rms = 0, rp = 0, ip = 0, maxmag2 = 0, mag2 = 0, npeak=0.;
+      double rp = 0, mag2 = 0;
       
-      rp = input[0];
-      output[0] = input[0];
-      sum2 = mag2 = (rp*rp);
-      maxmag2 = mag2;
-      for(unsigned int j=1; j < vlen; j++)
+      // fill the circular buffer
+      for(unsigned int j=0; j < vlen; j++)
 	{ rp = input[j];
-	  output[j] = rp;
-	  mag2 = (rp*rp);
+	  circular[inext] = rp*rp;
+	  mag2 = rp*rp;
 	  sum2 += mag2;
-	  if (mag2 > maxmag2) {
-	    maxmag2 = mag2;
-	    imax = j;
-	  }
-	} // end for all samples
-      rms = sqrt(sum2);
-      // if rms is non-zero
-      if (rms > 0.)
-	{ // determine peak magnitude
-	  npeak = sqrt(maxmag2)/rms;
-	  if (npeak > n_sigma)
-	    { 
-	      printf( "N-sigma Peak found %7.1f\n", npeak);
+	  inext++;
+	  if (inext >= MAX_BUFF) // if buffer is full
+	    { rms2 = sum2*oneovern;
+	      rms = sqrt(rms2);
+	      inext = 0;
+	      bufferfull = 1;    // flag buffer is now full
+	      nsigma_rms = nsigma*nsigma*rms2;
+	      sum2 = 0;          // restart rms sum
 	    }
-	}// end if signficant peak found
-      
+	  inext2++;              // update position for search 
+	  if (inext2 >= MAX_BUFF) // if at end of circular buffer
+	    inext2 = 0;           // go back to beginning
+	  if (bufferfull)         // when buffer is full, find peaks
+	    {
+	      if (circular[inext2] > nsigma_rms)
+		{
+		  imax2 = inext2;
+		  peak = sqrt(circular[inext2]);
+		  printf( "N-sigma Peak found: %7.1f\n", peak/rms);
+		  update_buffer();
+		}
+	    } // end if buffere full
+	} // end for all samples
+	      
+      if (! initialized) {
+	nsigma = d_dms;
+	for (int iii = 0; iii < vlen; iii++)
+	  { samples[iii] = input[iii];
+	  }
+	initialized = 1;     // no need to re-initialize the event
+	printf("Input N-Sigma: %7.1f\n", nsigma);
+      }
+
+      // always output the last event
+      for (int iii = 0; iii < vlen; iii++)
+	{ output[iii] = samples[iii];
+	}
+
       return 0;
     } // end of detect_impl::event()
 
