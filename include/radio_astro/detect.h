@@ -63,6 +63,10 @@ namespace gr {
        * creating new instances.
        */
       static sptr make(int vec_length, float dms, float f_obs, float bw, float t_int, int nt);
+
+      virtual void set_dms(float dms) = 0;
+      //      void set_dms(float dms) = 0;
+      
     };
 
   } // namespace radio_astro

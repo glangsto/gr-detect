@@ -1,6 +1,6 @@
 /* -*- c++ -*- */
 /* 
- * Copyright 2018 <+YOU OR YOUR COMPANY+>.
+ * Copyright 2019 - Quiet Skies LLC -- Glen Langston - glen.i.langston@gmail.com
  * 
  * This is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -64,6 +64,9 @@ namespace gr {
       // Where all the action really happens
       void forecast (int noutput_items, gr_vector_int &ninput_items_required);
 
+      //      virtual void set_dms( float dms);
+      void set_dms( float dms);
+      
       int update_buffer();
 
       int event(const float *input, float *output);

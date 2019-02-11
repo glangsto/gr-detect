@@ -1,6 +1,6 @@
 /* -*- c++ -*- */
 /* 
- * Copyright 2018 <+YOU OR YOUR COMPANY+>.
+ * Copyright 2019 - Quiet Skies LLC -- Glen Langston - glen.i.langston@gmail.com
  * 
  * This is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -67,6 +67,14 @@ namespace gr {
        	    ninput_items_required[i] = noutput_items;
     }
 
+    void 
+    detect_impl::set_dms ( float dms)
+    {
+      nsigma = dms;
+      printf("Input N Sigma: %7.1f\n", nsigma);
+      d_dms = dms;
+    }
+      
     int
     detect_impl::general_work (int noutput_items,
                        gr_vector_int &ninput_items,
@@ -125,7 +133,8 @@ namespace gr {
       // fill the circular buffer
       for(unsigned int j=0; j < vlen; j++)
 	{ rp = input[j];
-	  circular[inext] = rp*rp;
+	  circular[inext] = rp;
+	  circular2[inext] = rp*rp;
 	  mag2 = rp*rp;
 	  sum2 += mag2;
 	  inext++;
@@ -142,10 +151,10 @@ namespace gr {
 	    inext2 = 0;           // go back to beginning
 	  if (bufferfull)         // when buffer is full, find peaks
 	    {
-	      if (circular[inext2] > nsigma_rms)
+	      if (circular2[inext2] > nsigma_rms)
 		{
 		  imax2 = inext2;
-		  peak = sqrt(circular[inext2]);
+		  peak = sqrt(circular2[inext2]);
 		  printf( "N-sigma Peak found: %7.1f\n", peak/rms);
 		  update_buffer();
 		}
